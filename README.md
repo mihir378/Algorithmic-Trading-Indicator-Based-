@@ -6,7 +6,7 @@ The indicator based strategies that are formulated and tested are as follows:
     a)	20-Days and 5-Days Simple/Exponential Moving Average crossover (Double crossover).
     b)	14-Days, 9-Days and 8-Days Simple/Exponential Moving Average crossover (Triple crossover).
     c)	Relative Strength Indicator based Buy and Sell Strategies.
-	d)	Bollinger Band based Buy and Sell Strategies
+    d)	Bollinger Band based Buy and Sell Strategies
 	
 The pattern based strategies that are formulated and tested are as follows:
 
@@ -15,4 +15,7 @@ The pattern based strategies that are formulated and tested are as follows:
 
 To ensure the robustness of pattern-based strategies, and additional signal with respect to the Volume traded was added. 
 
-Note: The wider goal of this document is to establish a foundation structure that can be used to create all kinds of signalling functions and trading strategies because of those signalling functions. Furthermore, the impact point of this document is not limited to a single stock and can be applied to various stocks as well indices. 
+**Note**: The wider goal of this document is to establish a foundation structure that can be used to create all kinds of signalling functions and trading strategies because of those signalling functions. Furthermore, the impact point of this document is not limited to a single stock and can be applied to various stocks as well indices. 
+
+**Acknowledgement**: I would like to thank Dr. Chui Yu Ko for making his document on 'Technicals Analysis with R' publicly available on https://bookdown.org/kochiuyu/Technical-Analysis-with-R/about-author.html that assisted me in structuring the foundational code for this analysis document. 
+
