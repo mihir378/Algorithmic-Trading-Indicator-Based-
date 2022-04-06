@@ -15,3 +15,4 @@ The pattern based strategies that are formulated and tested are as follows:
 
 To ensure the robustness of pattern-based strategies, and additional signal with respect to the Volume traded was added. 
 
+Note: The wider goal of this document is to establish a foundation structure that can be used to create all kinds of signalling functions and trading strategies because of those signalling functions. Furthermore, the impact point of this document is not limited to a single stock and can be applied to various stocks as well indices. 
