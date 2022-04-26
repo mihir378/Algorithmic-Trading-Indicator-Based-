@@ -2,28 +2,27 @@
 library(quantmod)
 library(xts)
 library(PerformanceAnalytics)
-library(quantmod)
 library(ggplot2)
 library(plot.matrix)
 
 ### Section 1 - Indicator based Strategies ###
 
-getSymbols("^GSPC")
-price <- Cl(GSPC)              #Choosing SP500 
+getSymbols("AAPL")
+price <- Cl(AAPL)              #Choosing AAPL
 
 #Simple Moving Averages
-sma20 <-SMA(Cl(GSPC),n=20)
-sma14 <-SMA(Cl(GSPC),n=14)
-sma9 <-SMA(Cl(GSPC),n=9)
-sma8 <-SMA(Cl(GSPC),n=8)
-sma5 <-SMA(Cl(GSPC),n=5)
+sma20 <-SMA(Cl(AAPL),n=20)
+sma14 <-SMA(Cl(AAPL),n=14)
+sma9 <-SMA(Cl(AAPL),n=9)
+sma8 <-SMA(Cl(AAPL),n=8)
+sma5 <-SMA(Cl(AAPL),n=5)
 
 #Exponential Moving Averages
-ema20 <-EMA(Cl(GSPC),n=20)
-ema14 <- EMA(Cl(GSPC),n=14)
-ema9 <-EMA(Cl(GSPC),n=9)
-ema8 <-EMA(Cl(GSPC),n=8)
-ema5 <-EMA(Cl(GSPC),n=5)
+ema20 <- EMA(Cl(AAPL),n=20)
+ema14 <- EMA(Cl(AAPL),n=14)
+ema9 <-EMA(Cl(AAPL),n=9)
+ema8 <-EMA(Cl(AAPL),n=8)
+ema5 <-EMA(Cl(AAPL),n=5)
 
 #Relative Strength Index
 rsi <- RSI(price, n=14)
@@ -31,7 +30,7 @@ rsi <- RSI(price, n=14)
 
 ##### TRADING STRATEGIES - ALL COMBINATIONS #####
 
-# Desired Matrix will be of the following form
+# Desired Matrix will be of the folAAPLing form
 strat <- as.data.frame(matrix(1:36, nrow = 6, 
                    dimnames = list(c("20/5 SMA","20/5 EMA","14/9/8 SMA", "14/9/8 EMA","RSI 30", "RS1 45"), 
                                    c("20/5 SMA","20/5 EMA","14/9/8 SMA", "14/9/8 EMA","RSI 70", "RS1 55"))))
@@ -43,7 +42,7 @@ print(strat)
 qty <-1
 day <-20
 
-signal <- c()    #trade signal with size
+signal <- c()    
 signal[1:(day+1)] <- 0 
 
 wealth <-c()
@@ -64,11 +63,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_1<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_1)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -85,7 +84,7 @@ semisd.ret1 <- SemiSD(ret1)
 qty <-1
 day <-20
 
-signal <- c()    #trade signal with size
+signal <- c()    
 signal[1:(day+1)] <- 0 
 
 wealth <-c()
@@ -106,11 +105,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_2<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_2)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -127,7 +126,7 @@ semisd.ret2 <- SemiSD(ret2)
 qty <-1
 day <-20
 
-signal <- c()    #trade signal with size
+signal <- c()   
 signal[1:(day+1)] <- 0 
 
 wealth <-c()
@@ -148,11 +147,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_3<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_3)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -169,7 +168,7 @@ semisd.ret3 <- SemiSD(ret3)
 qty <-1
 day <-20
 
-signal <- c()    #trade signal with size
+signal <- c()   
 signal[1:(day+1)] <- 0 
 
 wealth <-c()
@@ -190,11 +189,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_4<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_4)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -232,11 +231,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_5<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_5)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -274,11 +273,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_6<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_6)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -316,11 +315,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_7<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_7)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -358,11 +357,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_8<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_8)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -400,11 +399,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_9<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_9)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -442,11 +441,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_10<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_10)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -484,11 +483,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_11<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_11)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -526,11 +525,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_12<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_12)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -568,11 +567,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_13<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_13)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -611,11 +610,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_14<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_14)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -653,11 +652,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_15<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_15)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -695,11 +694,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_16<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_16)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -737,11 +736,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_17<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_17)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -779,11 +778,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_18<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_18)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -821,11 +820,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_19<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_19)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -863,11 +862,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_20<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_20)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -905,11 +904,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_21<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_21)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -947,11 +946,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_22<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_22)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -989,11 +988,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_23<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_23)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1031,11 +1030,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_24<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_24)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1073,11 +1072,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_25<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_25)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1116,11 +1115,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_26<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_26)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1159,11 +1158,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_27<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_27)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1201,11 +1200,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_28<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_28)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1243,11 +1242,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_29<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_29)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1285,11 +1284,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_30<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_30)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1327,11 +1326,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_31<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_31)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1369,11 +1368,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_32<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_32)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1411,11 +1410,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_33<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_33)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1453,11 +1452,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_34<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_34)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1495,11 +1494,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_35<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_35)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1537,11 +1536,11 @@ for (i in (day+1): length(price)){
     signal[i] <- signal[i-1]
   }
 }
-signal<-reclass(signal,price)
+signal_36<-reclass(signal,price)
 
-Close <- Cl(GSPC)
-Open <- Op(GSPC)
-trade <- Lag(signal)
+Close <- Cl(AAPL)
+Open <- Op(AAPL)
+trade <- Lag(signal_36)
 for (i in (day+1):length(price)){
   profit[i] <- qty * trade[i] * (Close[i] - Open[i])  
   wealth[i] <- wealth[i-1] + profit[i]
@@ -1598,14 +1597,27 @@ colnames(semisd.ret.matrix) <- c("20/5 SMA","20/5 EMA","14/9/8 SMA", "14/9/8 EMA
 rownames(semisd.ret.matrix) <- c("20/5 SMA","20/5 EMA","14/9/8 SMA", "14/9/8 EMA","RSI 30", "RS1 45")
 View(semisd.ret.matrix)
 
+# Creating Single Data Frame
+signals <- cbind.data.frame(signal_1,signal_2,signal_3,signal_4,signal_5,signal_6,
+                            signal_7,signal_8,signal_9,signal_10,signal_11,signal_12,
+                            signal_13,signal_14,signal_15,signal_16,signal_17,signal_18,
+                            signal_19,signal_20,signal_21,signal_22,signal_23,signal_24,
+                            signal_25,signal_26,signal_27,signal_28,signal_29,signal_30,
+                            signal_31,signal_32,signal_33,signal_34,signal_35,signal_36)
+#(signals)
+
+sig_ind_total <- signals%>%
+  mutate("Total Sum - Signals"=rowSums(.))
+View(sig_ind_total)
+
 #### Choose the best Trading Strategy and re-run the specific code to reset signal 
 
 #### CHARTING ######
-chartSeries(GSPC,
+chartSeries(AAPL,
             subset="2021-01::2022-04-09",
             theme=chartTheme('white'))
 addRSI(n=14)
-addSMA(n=14,on=1,col = "blue")
-addSMA(n=9,on=1, col = "purple")
-addSMA(n=8,on=1,col = "pink")
+#addSMA(n=14,on=1,col = "blue")
+#addSMA(n=9,on=1, col = "purple")
+#addSMA(n=8,on=1,col = "pink")
 addTA(signal,type='S',col='red')
